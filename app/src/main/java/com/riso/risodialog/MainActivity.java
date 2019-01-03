@@ -3,6 +3,9 @@ package com.riso.risodialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * @author wangl
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
