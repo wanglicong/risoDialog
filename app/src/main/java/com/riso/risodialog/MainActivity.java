@@ -2,16 +2,15 @@ package com.riso.risodialog;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Toast;
 
-import com.riso.risodialog.dialogs.CenterDialogView;
-import com.riso.risodialog.dialogs.RisoDialog;
+import com.riso.risodialog.dialogs.CenterDialog;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * @author wangl
@@ -26,26 +25,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void btnClick(View view) {
-        new RisoDialog().setContentView(new CenterDialogView().getContentView(this)).show(getSupportFragmentManager(), "1");
+        new CenterDialog()
+                .setTitle("友情提示")
+                .setDes("天冷多穿衣服,注意保暖~")
+                .setOnCenterDialogClick(new CenterDialog.OnCenterDialogClick() {
+                    @Override
+                    public void onBtnClick(CenterDialog centerDialog, boolean clickBtn, String inputContent) {
+                        Toast.makeText(MainActivity.this, clickBtn ? "点击了确定" + inputContent : "点击了取消", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(getSupportFragmentManager());
     }
 
     public void btnClick1(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示");
-        builder.setMessage("确定要退出吗?");
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+
+
+        System.out.println(Calendar.getInstance(TimeZone.getTimeZone("GMT+8")).getTime().getTime()+"==111==");
+        System.out.println(System.currentTimeMillis()+"==2222==");
     }
 }

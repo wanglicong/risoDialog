@@ -13,7 +13,7 @@
     <style name="RisoDialog">
         <!--系统动画-->
         <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustResize</item>
         <!--透明背景-->
         <item name="android:windowBackground">@android:color/transparent</item>
         <!--是否悬浮-->
