@@ -1,11 +1,14 @@
 package com.riso.risodialog.dialogs;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.riso.risodialog.R;
@@ -18,7 +21,7 @@ import com.riso.risodialog.R;
  */
 public abstract class RisoDialog extends DialogFragment {
 
-    private int styleTheme = R.style.RisoDialog;
+    public int styleTheme = R.style.RisoDialog;
     public LinearLayout rootView;
     private boolean windowCloseOnTouchOutside = true;
 
@@ -46,6 +49,8 @@ public abstract class RisoDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
         //设置 Dialog 风格
         setStyle(DialogFragment.STYLE_NORMAL, styleTheme);
+        setWindowCloseOnTouchOutside(windowCloseOnTouchOutside);
+
     }
 
     public abstract View getContentView(LayoutInflater inflater);
@@ -53,6 +58,12 @@ public abstract class RisoDialog extends DialogFragment {
 
     public void show(FragmentManager manager) {
         super.showNow(manager, "risoDialog");
+        Dialog dialog = getDialog();
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(attributes);
     }
 
 

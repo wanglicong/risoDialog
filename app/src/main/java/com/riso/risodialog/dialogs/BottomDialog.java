@@ -3,25 +3,33 @@ package com.riso.risodialog.dialogs;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.riso.risodialog.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 作用:
+ * 作用: 从下面 弹出的 dialog
  *
  * @author: 王黎聪
  * 创建时间: 2019/1/4.
  */
-public class BottomDialog extends RisoDialog implements View.OnClickListener {
+public class BottomDialog<T> extends RisoDialog implements View.OnClickListener {
 
     public View contentView;
-    private OnCenterDialogClick onCenterDialogClick;
+    private OnBottomDialogClick onBottomDialogClick;
     private TextView tv_title;
     private TextView tv_des;
     private TextView tv_cancel;
+    private List<T> dataList = new ArrayList<>();
 
 
     private String title;
@@ -30,11 +38,20 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
 
     private boolean autoDismiss = true;
     public ListView lv_list;
+    private LayoutInflater inflater;
+    private BottomDialogAdapter bottomDialogAdapter;
+
+    public BottomDialog() {
+        //设置从下弹出的 动画
+        styleTheme = R.style.RisoDialogBottom;
+    }
 
     @Override
     public View getContentView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.dialog_riso_center, null);
+        this.inflater = inflater;
+        contentView = inflater.inflate(R.layout.dialog_riso_bottom, null);
         initView();
+        contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return contentView;
     }
 
@@ -59,6 +76,7 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
 
         if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
             contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
+            contentView.findViewById(R.id.ll_list).setPadding(0, 0, 0, 0);
         }
         //设置取消
         if (TextUtils.isEmpty(cancel)) {
@@ -67,6 +85,21 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
             tv_cancel.setText(cancel);
             tv_cancel.setOnClickListener(this);
         }
+        //设置适配器
+        bottomDialogAdapter = new BottomDialogAdapter();
+        lv_list.setAdapter(bottomDialogAdapter);
+        lv_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (null != onBottomDialogClick) {
+                    T itemData = null;
+                    if (dataList.size() > position) {
+                        itemData = dataList.get(position);
+                    }
+                    onBottomDialogClick.onItemClick(BottomDialog.this, position, itemData);
+                }
+            }
+        });
     }
 
 
@@ -80,6 +113,7 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
             tv_title.setVisibility(TextUtils.isEmpty(title) ? View.GONE : View.VISIBLE);
             if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
                 contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
+                contentView.findViewById(R.id.ll_list).setPadding(0, 0, 0, 0);
             }
         }
         return this;
@@ -95,6 +129,7 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
             tv_des.setVisibility(TextUtils.isEmpty(des) ? View.GONE : View.VISIBLE);
             if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
                 contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
+                contentView.findViewById(R.id.ll_list).setPadding(0, 0, 0, 0);
             }
         }
         return this;
@@ -127,16 +162,16 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
     /**
      * 设置点击事件
      */
-    public BottomDialog setOnCenterDialogClick(OnCenterDialogClick onCenterDialogClick) {
-        this.onCenterDialogClick = onCenterDialogClick;
+    public BottomDialog setOnBottomDialogClick(OnBottomDialogClick<T> onBottomDialogClick) {
+        this.onBottomDialogClick = onBottomDialogClick;
         return this;
     }
 
     @Override
     public void onClick(View v) {
         if (v == tv_cancel) {
-            if (null != onCenterDialogClick) {
-                onCenterDialogClick.onBtnClick(this, false, "");
+            if (null != onBottomDialogClick) {
+                onBottomDialogClick.onItemClick(this, -1, null);
             }
         }
         if (autoDismiss && !isRemoving()) {
@@ -144,16 +179,57 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
         }
     }
 
+    /**
+     * 设置展示数据
+     *
+     * @param dataList 展示数据 , 对象一定要 重写 toString方法
+     */
+    public BottomDialog setDataList(List<T> dataList) {
+        this.dataList = dataList;
+        if (null != bottomDialogAdapter) {
+            bottomDialogAdapter.notifyDataSetChanged();
+        }
+        return this;
+    }
+
+    public class BottomDialogAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return dataList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return dataList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (null == convertView) {
+                convertView = inflater.inflate(R.layout.dialog_bottom_item, null);
+            }
+            TextView tv = (TextView) convertView;
+            tv.setText(dataList.get(position).toString());
+            return convertView;
+        }
+    }
+
 
     /**
      * 接口回调
      */
-    public interface OnCenterDialogClick {
+    public interface OnBottomDialogClick<T> {
         /**
-         * @param centerDialog 弹框本身
-         * @param clickBtn     true=确认 ; false=取消
-         * @param inputContent 输入框内容
+         * @param centerDialog  弹框本身
+         * @param clickPosition -1====取消
          */
-        void onBtnClick(BottomDialog centerDialog, boolean clickBtn, String inputContent);
+        void onItemClick(BottomDialog centerDialog, int clickPosition, T itemBean);
     }
+
 }

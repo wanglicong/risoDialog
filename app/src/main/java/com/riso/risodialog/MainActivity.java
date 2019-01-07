@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.riso.risodialog.dialogs.BottomDialog;
 import com.riso.risodialog.dialogs.CenterDialog;
+
+import java.util.Arrays;
 
 
 /**
@@ -36,6 +39,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnClick1(View view) {
+        new BottomDialog<String>()
+                .setTitle("")
+                .setDes("")
+                .setDataList(Arrays.asList("男", "女"))
+                .setOnBottomDialogClick(new BottomDialog.OnBottomDialogClick<String>() {
+                    @Override
+                    public void onItemClick(BottomDialog centerDialog, int clickPosition, String itemBean) {
+                        if (-1 == clickPosition) {
+                            Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, itemBean, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).show(getSupportFragmentManager());
 
     }
 }

@@ -21,6 +21,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_dialog_bg"
@@ -58,11 +59,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="14dp"
-                android:background="#bbbbbb"/>
+                android:background="#aaaaaa"/>
 
             <ListView
                 android:id="@+id/lv_list"
                 android:layout_width="match_parent"
+                android:divider="#bbbbbb"
+                android:dividerHeight="1px"
+                android:listSelector="@drawable/selector_dialog_item"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
@@ -72,8 +76,8 @@
         android:id="@+id/tv_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:background="@drawable/shape_dialog_bg"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/selector_dialog_item"
         android:gravity="center"
         android:paddingBottom="12dp"
         android:paddingTop="12dp"
