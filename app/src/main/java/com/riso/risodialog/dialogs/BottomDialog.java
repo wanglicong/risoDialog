@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.riso.risodialog.R;
@@ -21,17 +22,14 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
     private TextView tv_title;
     private TextView tv_des;
     private TextView tv_cancel;
-    private TextView tv_ok;
-    private EditText et_input;
 
 
     private String title;
     private String des;
     private String cancel = "取消";
-    private String ok = "确定";
-    private String hint;
 
     private boolean autoDismiss = true;
+    public ListView lv_list;
 
     @Override
     public View getContentView(LayoutInflater inflater) {
@@ -45,8 +43,7 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
         tv_title = contentView.findViewById(R.id.tv_title);
         tv_des = contentView.findViewById(R.id.tv_des);
         tv_cancel = contentView.findViewById(R.id.tv_cancel);
-        tv_ok = contentView.findViewById(R.id.tv_ok);
-        et_input = contentView.findViewById(R.id.et_input);
+        lv_list = contentView.findViewById(R.id.lv_list);
         //设置标题
         if (TextUtils.isEmpty(title)) {
             tv_title.setVisibility(View.GONE);
@@ -60,46 +57,45 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
             tv_des.setText(des);
         }
 
-        //设置描述
-        if (!TextUtils.isEmpty(hint)) {
-            et_input.setVisibility(View.VISIBLE);
-            et_input.setHint(hint);
+        if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
+            contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
         }
-
         //设置取消
         if (TextUtils.isEmpty(cancel)) {
             tv_cancel.setVisibility(View.GONE);
-            contentView.findViewById(R.id.v_center).setVisibility(View.GONE);
-            tv_ok.setBackgroundResource(R.drawable.selector_dialog_bottom);
         } else {
             tv_cancel.setText(cancel);
             tv_cancel.setOnClickListener(this);
         }
-        tv_ok.setText(ok);
-        tv_ok.setOnClickListener(this);
     }
 
 
     /**
-     * 设置空 就会隐藏
+     * 设置标题  , 空 就会隐藏
      */
     public BottomDialog setTitle(String title) {
         this.title = title;
         if (null != tv_title) {
             tv_title.setText(title);
             tv_title.setVisibility(TextUtils.isEmpty(title) ? View.GONE : View.VISIBLE);
+            if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
+                contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
+            }
         }
         return this;
     }
 
     /**
-     * 设置空 就会隐藏
+     * 设置描述, 空 就会隐藏
      */
     public BottomDialog setDes(String des) {
         this.des = des;
         if (null != tv_des) {
             tv_des.setText(des);
             tv_des.setVisibility(TextUtils.isEmpty(des) ? View.GONE : View.VISIBLE);
+            if (tv_title.getVisibility() == View.GONE && tv_des.getVisibility() == View.GONE) {
+                contentView.findViewById(R.id.v_line).setVisibility(View.GONE);
+            }
         }
         return this;
     }
@@ -115,35 +111,10 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
             boolean emptyCancel = TextUtils.isEmpty(cancel);
             tv_cancel.setVisibility(emptyCancel ? View.GONE : View.VISIBLE);
             contentView.findViewById(R.id.v_center).setVisibility(emptyCancel ? View.GONE : View.VISIBLE);
-            tv_ok.setBackgroundResource(emptyCancel ? R.drawable.selector_dialog_bottom : R.drawable.selector_dialog_right);
         }
         return this;
     }
 
-
-    /**
-     * 默认文案  确定
-     */
-    public BottomDialog setOk(String ok) {
-        this.ok = ok;
-        if (null != tv_ok) {
-            tv_ok.setText(ok);
-        }
-        return this;
-    }
-
-    /**
-     * 默认隐藏  设置 提示文案 就展示
-     */
-    public BottomDialog setHint(String hint) {
-        this.hint = hint;
-        //设置描述
-        if (null != et_input) {
-            et_input.setHint(hint);
-            et_input.setVisibility(TextUtils.isEmpty(hint) ? View.GONE : View.VISIBLE);
-        }
-        return this;
-    }
 
     /**
      * 点击按钮 弹窗自动消失
@@ -163,15 +134,7 @@ public class BottomDialog extends RisoDialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == tv_ok) {
-            if (null != onCenterDialogClick) {
-                String inputText = "";
-                if (null != et_input && et_input.getVisibility() == View.VISIBLE) {
-                    inputText = et_input.getText().toString();
-                }
-                onCenterDialogClick.onBtnClick(this, true, inputText);
-            }
-        } else if (v == tv_cancel) {
+        if (v == tv_cancel) {
             if (null != onCenterDialogClick) {
                 onCenterDialogClick.onBtnClick(this, false, "");
             }

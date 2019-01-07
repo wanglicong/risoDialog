@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import com.riso.risodialog.dialogs.CenterDialog;
 
-import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * @author wangl
@@ -39,8 +37,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnClick1(View view) {
 
-
-        System.out.println(Calendar.getInstance(TimeZone.getTimeZone("GMT+8")).getTime().getTime()+"==111==");
-        System.out.println(System.currentTimeMillis()+"==2222==");
     }
 }

@@ -3,102 +3,81 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingRight="24dp">
 
+    <View
+        android:layout_width="1px"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_dialog_bg"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:paddingTop="16dp">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="4dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:textColor="#222222"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
-
-
-        <TextView
-            android:id="@+id/tv_des"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingBottom="4dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:textColor="#333333"
-            android:textSize="14sp"/>
-
-
-        <EditText
-            android:id="@+id/et_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/shape_dialog_et_bg"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:padding="6dp"
-            android:singleLine="true"
-            android:textColor="#333333"
-            android:textSize="14sp"
-            android:visibility="gone"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="14dp"
-            android:background="#bbbbbb"/>
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:background="@drawable/shape_dialog_bg"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
 
             <TextView
-                android:id="@+id/tv_cancel"
-                android:layout_width="0dp"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector_dialog_left"
                 android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:textColor="#297ef7"
-                android:textSize="16sp"/>
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="标题"
+                android:textColor="#222222"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="心念目标,即可实现"
+                android:textColor="#333333"
+                android:textSize="14sp"/>
 
             <View
-                android:id="@+id/v_center"
-                android:layout_width="1px"
-                android:layout_height="match_parent"
+                android:id="@+id/v_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="14dp"
                 android:background="#bbbbbb"/>
 
-            <TextView
-                android:id="@+id/tv_ok"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector_dialog_right"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:textColor="#297ef7"
-                android:textSize="16sp"/>
-
+            <ListView
+                android:id="@+id/lv_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/shape_dialog_bg"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp"
+        android:text="取消"
+        android:textColor="#297ef7"
+        android:textSize="16sp"/>
 </LinearLayout>
