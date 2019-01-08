@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
  * 作用: 弹窗基类 .  是用来集成 ,, 这个 作用 就是 规范了 style
  *
  * @author: 王黎聪
- *
+ * <p>
  * 创建时间: 2019/1/3.
  */
 public abstract class RisoDialog extends DialogFragment {
@@ -55,14 +55,23 @@ public abstract class RisoDialog extends DialogFragment {
     public abstract View getContentView(LayoutInflater inflater);
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Dialog dialog = getDialog();
+        if (null != dialog) {
+            Window window = dialog.getWindow();
+            WindowManager.LayoutParams attributes = window.getAttributes();
+            attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+            attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+            window.setAttributes(attributes);
+        } else {
+            System.out.println("空了");
+        }
+    }
+
     public void show(FragmentManager manager) {
         super.showNow(manager, "risoDialog");
-        Dialog dialog = getDialog();
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
-        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(attributes);
     }
 
 
