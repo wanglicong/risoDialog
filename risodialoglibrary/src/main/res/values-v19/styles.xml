@@ -13,6 +13,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <!--是否悬浮-->
         <item name="android:windowIsFloating">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
 
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -32,6 +33,7 @@
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 无标题 -->
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
         <!-- Dialog进入及退出动画 -->
