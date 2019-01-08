@@ -1,5 +1,8 @@
 package com.riso.risodialog.dialogs;
 
+import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.support.annotation.ColorRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +38,14 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
     private String title;
     private String des;
     private String cancel = "取消";
+    private Typeface typeface = null;
 
     private boolean autoDismiss = true;
     public ListView lv_list;
     private LayoutInflater inflater;
     private BottomDialogAdapter bottomDialogAdapter;
+
+    private int colorCancel = R.color.colorCancel;
 
     public BottomDialog() {
         //设置从下弹出的 动画
@@ -61,6 +67,11 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
         tv_des = contentView.findViewById(R.id.tv_des);
         tv_cancel = contentView.findViewById(R.id.tv_cancel);
         lv_list = contentView.findViewById(R.id.lv_list);
+        tv_cancel.setTextColor(getResources().getColor(colorCancel));
+        if (null != typeface) {
+            tv_cancel.setTypeface(typeface);
+        }
+
         //设置标题
         if (TextUtils.isEmpty(title)) {
             tv_title.setVisibility(View.GONE);
@@ -150,6 +161,27 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
         return this;
     }
 
+    /**
+     * 设置 取消字体颜色
+     */
+    public BottomDialog setCancelColor(@ColorRes int colorCancel) {
+        this.colorCancel = colorCancel;
+        if (null != tv_cancel) {
+            tv_cancel.setTextColor(getResources().getColor(colorCancel));
+        }
+        return this;
+    }
+
+    /**
+     * 设置取消 加粗
+     */
+    public BottomDialog setCancelFont(Typeface typeface) {
+        this.typeface = typeface;
+        if (null != tv_cancel) {
+            tv_cancel.setTypeface(typeface);
+        }
+        return this;
+    }
 
     /**
      * 点击按钮 弹窗自动消失

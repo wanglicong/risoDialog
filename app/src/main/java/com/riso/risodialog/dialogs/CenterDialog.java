@@ -1,5 +1,7 @@
 package com.riso.risodialog.dialogs;
 
+import android.annotation.SuppressLint;
+import android.support.annotation.ColorRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,10 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
     private String ok = "确定";
     private String hint;
 
+
+    private int colorCancel = R.color.colorCancel;
+    private int colorOk = R.color.colorOk;
+
     private boolean autoDismiss = true;
 
     @Override
@@ -47,6 +53,8 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
         tv_cancel = contentView.findViewById(R.id.tv_cancel);
         tv_ok = contentView.findViewById(R.id.tv_ok);
         et_input = contentView.findViewById(R.id.et_input);
+        tv_cancel.setTextColor(getResources().getColor(colorCancel));
+        tv_ok.setTextColor(getResources().getColor(colorOk));
         //设置标题
         if (TextUtils.isEmpty(title)) {
             tv_title.setVisibility(View.GONE);
@@ -150,6 +158,31 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
      */
     public CenterDialog setAutoDismiss(boolean autoDismiss) {
         this.autoDismiss = autoDismiss;
+        return this;
+    }
+
+    /**
+     * 设置取消颜色
+     */
+    public CenterDialog setCancelColor(@ColorRes int colorCancel) {
+        this.colorCancel = colorCancel;
+        if (null != tv_cancel) {
+            tv_cancel.setTextColor(getResources().getColor(colorCancel));
+        }
+        return this;
+    }
+
+    /**
+     * 设置确定颜色
+     *
+     * @param colorOk
+     * @return
+     */
+    public CenterDialog setColorOk(@ColorRes int colorOk) {
+        this.colorOk = colorOk;
+        if (null != tv_ok) {
+            tv_ok.setTextColor(getResources().getColor(colorOk));
+        }
         return this;
     }
 
