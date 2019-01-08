@@ -1,4 +1,4 @@
-package com.riso.risodialog.dialogs;
+package com.riso.risodialoglibrary;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,12 +11,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.riso.risodialog.R;
-
 /**
- * 作用:
+ * 作用: 弹窗基类 .  是用来集成 ,, 这个 作用 就是 规范了 style
  *
  * @author: 王黎聪
+ *
  * 创建时间: 2019/1/3.
  */
 public abstract class RisoDialog extends DialogFragment {

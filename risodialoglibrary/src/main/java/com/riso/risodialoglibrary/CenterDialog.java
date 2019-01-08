@@ -1,14 +1,11 @@
-package com.riso.risodialog.dialogs;
+package com.riso.risodialoglibrary;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.ColorRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.riso.risodialog.R;
 
 /**
  * 作用:

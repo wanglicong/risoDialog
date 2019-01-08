@@ -1,6 +1,5 @@
-package com.riso.risodialog.dialogs;
+package com.riso.risodialoglibrary;
 
-import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.support.annotation.ColorRes;
 import android.text.TextUtils;
@@ -9,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.riso.risodialog.R;
 
 import java.util.ArrayList;
 import java.util.List;

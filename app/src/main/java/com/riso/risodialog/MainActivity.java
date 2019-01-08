@@ -1,14 +1,13 @@
 package com.riso.risodialog;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.riso.risodialog.dialogs.BottomDialog;
-import com.riso.risodialog.dialogs.CenterDialog;
+
+import com.riso.risodialoglibrary.BottomDialog;
+import com.riso.risodialoglibrary.CenterDialog;
 
 import java.util.Arrays;
 
