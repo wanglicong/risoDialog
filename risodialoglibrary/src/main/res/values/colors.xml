@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="clickDown">#cccccc</color>
-    <color name="clickUp">#00000000</color>
+    <color name="rdClickDown">#cccccc</color>
+    <color name="rdClickUp">#00000000</color>
 
-    <color name="colorCancel">#ff297ef7</color>
-    <color name="colorOk">#ff297ef7</color>
+    <color name="rdColorCancel">#ff297ef7</color>
+    <color name="rdColorOk">#ff297ef7</color>
 </resources>

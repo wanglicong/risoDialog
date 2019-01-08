@@ -26,7 +26,7 @@ public abstract class RisoDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = (LinearLayout) inflater.inflate(R.layout.dialog_riso, container);
+        rootView = (LinearLayout) inflater.inflate(R.layout.rd_dialog_riso, container);
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

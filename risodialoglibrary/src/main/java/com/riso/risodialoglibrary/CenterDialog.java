@@ -31,14 +31,14 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
     private String hint;
 
 
-    private int colorCancel = R.color.colorCancel;
-    private int colorOk = R.color.colorOk;
+    private int colorCancel = R.color.rdColorCancel;
+    private int colorOk = R.color.rdColorOk;
 
     private boolean autoDismiss = true;
 
     @Override
     public View getContentView(LayoutInflater inflater) {
-        contentView = inflater.inflate(R.layout.dialog_riso_center, null);
+        contentView = inflater.inflate(R.layout.rd_dialog_riso_center, null);
         initView();
         return contentView;
     }
@@ -75,7 +75,7 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
         if (TextUtils.isEmpty(cancel)) {
             tv_cancel.setVisibility(View.GONE);
             contentView.findViewById(R.id.v_center).setVisibility(View.GONE);
-            tv_ok.setBackgroundResource(R.drawable.selector_dialog_bottom);
+            tv_ok.setBackgroundResource(R.drawable.rd_selector_dialog_bottom);
         } else {
             tv_cancel.setText(cancel);
             tv_cancel.setOnClickListener(this);
@@ -120,7 +120,7 @@ public class CenterDialog extends RisoDialog implements View.OnClickListener {
             boolean emptyCancel = TextUtils.isEmpty(cancel);
             tv_cancel.setVisibility(emptyCancel ? View.GONE : View.VISIBLE);
             contentView.findViewById(R.id.v_center).setVisibility(emptyCancel ? View.GONE : View.VISIBLE);
-            tv_ok.setBackgroundResource(emptyCancel ? R.drawable.selector_dialog_bottom : R.drawable.selector_dialog_right);
+            tv_ok.setBackgroundResource(emptyCancel ? R.drawable.rd_selector_dialog_bottom : R.drawable.rd_selector_dialog_right);
         }
         return this;
     }

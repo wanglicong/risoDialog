@@ -41,7 +41,7 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
     private LayoutInflater inflater;
     private BottomDialogAdapter bottomDialogAdapter;
 
-    private int colorCancel = R.color.colorCancel;
+    private int colorCancel = R.color.rdColorCancel;
 
     public BottomDialog() {
         //设置从下弹出的 动画
@@ -51,7 +51,7 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
     @Override
     public View getContentView(LayoutInflater inflater) {
         this.inflater = inflater;
-        contentView = inflater.inflate(R.layout.dialog_riso_bottom, null);
+        contentView = inflater.inflate(R.layout.rd_dialog_riso_bottom, null);
         initView();
         contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return contentView;
@@ -240,7 +240,7 @@ public class BottomDialog<T> extends RisoDialog implements View.OnClickListener 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (null == convertView) {
-                convertView = inflater.inflate(R.layout.dialog_bottom_item, null);
+                convertView = inflater.inflate(R.layout.rd_dialog_bottom_item, null);
             }
             TextView tv = (TextView) convertView;
             tv.setText(dataList.get(position).toString());
